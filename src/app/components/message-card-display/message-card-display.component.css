@@ -1,0 +1,37 @@
+.message-container {
+    width: 700px;
+    /* display: flex; */
+}
+
+
+.message-from-user {
+    padding: 10px 10px 10px 10px;
+    min-height: 15px;
+    overflow-wrap: break-word;
+    max-width: 300px;
+    background-color: rgb(157, 222, 169);
+    margin-bottom: 20px;
+    border-radius: 8px;
+    float: right;
+}
+
+.message-from-others {
+    padding: 10px 10px 10px 10px;
+    min-height: 15px;
+    overflow-wrap: break-word;
+    max-width: 300px;
+    background-color: rgb(191, 157, 222);
+    margin-bottom: 20px;
+    border-radius: 8px;
+    float: left;
+}
+
+.message-sender {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.message-time {
+    float: right;
+    color: rgba(0, 0, 0, 0.434);
+}

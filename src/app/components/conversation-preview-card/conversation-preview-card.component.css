@@ -1,0 +1,8 @@
+.conversation-preview-card-container {
+    background-color: rgb(174, 174, 174);
+    width: 100%;
+    height: 80px;
+    border-radius: 10px;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,28 @@
+.chat-sidebar-container {
+    height: 100%;
+    width: 400px;
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+.chat-sidebar-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
+
+.search-bar-container {
+    width: 300px;
+}
+
+.search-bar {
+    width: 300px;
+}
+
+.conversation-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}

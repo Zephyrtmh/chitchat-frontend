@@ -1,0 +1,25 @@
+<div class="chat-window-container">
+   <div *ngIf="activeConversation" class="chat-window">
+        <div class="conversation-header">
+            {{activeConversation.conversationName}}
+        </div>
+        <div id = "conversation-messages-container" class="conversation-messages-container">
+            <div class="conversation-messages" id="conversation-messages">
+                <app-message-card-display id="{{'Id '+i}}" [message]="message" *ngFor="let message of activeConversation.messages; let i = index"></app-message-card-display>
+            </div>
+        </div>
+        <div class="new-message-container">
+            <div>
+                emoji
+            </div>
+            <div class="input-message-box-container">
+                <form [formGroup]="textForm" class="input-message-form" (ngSubmit)="submitText()">
+                    <input type="text" class="input-message-box" formControlName="textInput">
+                </form>
+                <button type="submit" (click)="submitText()">
+                    >
+                </button>
+            </div>
+        </div>
+   </div>
+</div>

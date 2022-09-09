@@ -1,0 +1,17 @@
+<div class="chat-sidebar-container">
+    <div class="chat-sidebar-top">
+        <div class="menu-button button">menu</div>
+        <div class="search-bar-container">
+            <form [formGroup]="searchForm">
+                <input type="text"  class="search-bar" formControlName="searchString">
+            </form>
+        </div>
+    </div>
+    <div>
+        <ul class="conversation-list">
+            <li *ngFor="let conversation of conversations | filter:searchForm.controls['searchString'].value" (click)="onConversationClick(conversation)" >
+                <app-conversation-preview-card [conversation]="conversation"></app-conversation-preview-card>
+            </li>
+        </ul>
+    </div>
+</div>

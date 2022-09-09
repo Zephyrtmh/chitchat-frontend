@@ -1,0 +1,7 @@
+<div class="message-container">
+    <div [ngClass]="isFromLoggedInUser ? 'message-from-user': 'message-from-others' ">
+        <div *ngIf="fromUser" class="message-sender">{{fromUser.username}}</div>
+        <div class="message-content">{{message.messageContent}}</div>
+        <div class="message-time">{{messageTime}}</div>
+    </div>
+</div>
