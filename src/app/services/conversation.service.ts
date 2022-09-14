@@ -6,13 +6,19 @@ import { Conversation } from '../models/conversation.model';
   providedIn: 'root'
 })
 export class ConversationService {
-
-  constructor(private httpClient: HttpClient) { }
+  userConversations: Conversation[];
+  constructor(private httpClient: HttpClient) {
+    
+  }
 
   baseUrl: string = "http://localhost:8080/conversation";
 
   getConversations() {
     return this.httpClient.get<Conversation[]>(this.baseUrl+"/get/all")
+  }
+
+  getConversationsByUserId(userId: number) {
+    return this.httpClient.get<number[]>(this.baseUrl+"/get/all/"+userId);
   }
   
 }

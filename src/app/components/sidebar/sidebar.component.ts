@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Conversation } from 'src/app/models/conversation.model';
 import { ChatWindowService } from 'src/app/services/chat-window.service';
 import { ConversationService } from 'src/app/services/conversation.service';
+import { UserService } from 'src/app/services/user.service';
+import { WebsocketConnectionService } from 'src/app/services/websocket-connection.service';
 import { ChatWindowComponent } from '../chat-window/chat-window.component';
 
 @Component({
@@ -19,7 +21,9 @@ export class SidebarComponent implements OnInit {
   constructor(
     private conversationService: ConversationService, 
     private formBuilder:FormBuilder,
-    private chatWindowService: ChatWindowService
+    private chatWindowService: ChatWindowService,
+    private userService: UserService,
+    private websocketConnectionService: WebsocketConnectionService,
     ) { }
 
   ngOnInit(): void {
@@ -29,7 +33,10 @@ export class SidebarComponent implements OnInit {
 
     this.conversationService.getConversations().subscribe(conversations => {
       this.conversations = conversations;
+      this.websocketConnectionService.connect();
     });
+
+    
   }
 
   onConversationClick(conversation: Conversation) {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Message } from '../models/message.model';
 import { User } from '../models/user.model';
+import { WebsocketConnectionService } from './websocket-connection.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class UserService {
   }
   loginUser() {
     this.loggedIn = true;
+
     return this.httpClient.get<User>(this.baseUrl+"/get/1");
   }
 
