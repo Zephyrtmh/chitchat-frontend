@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConversationPreviewCardComponent } from './components/conversation-preview-card/conversation-preview-card.component';
 import { MessageCardDisplayComponent } from './components/message-card-display/message-card-display.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 
@@ -20,6 +21,7 @@ import { MessageCardDisplayComponent } from './components/message-card-display/m
     ChatWindowComponent,
     ConversationPreviewCardComponent,
     MessageCardDisplayComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

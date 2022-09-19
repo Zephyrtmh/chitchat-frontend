@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   conversations: Conversation[];
   searchForm: FormGroup;
   activeConversation: Conversation;
+  conversationIds: number[];
   @Output() activeConversationChange = new EventEmitter<any>();
 
   constructor(
@@ -24,7 +25,9 @@ export class SidebarComponent implements OnInit {
     private chatWindowService: ChatWindowService,
     private userService: UserService,
     private websocketConnectionService: WebsocketConnectionService,
-    ) { }
+    ) {
+      this.websocketConnectionService.connect();
+    }
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
@@ -33,7 +36,7 @@ export class SidebarComponent implements OnInit {
 
     this.conversationService.getConversations().subscribe(conversations => {
       this.conversations = conversations;
-      this.websocketConnectionService.connect();
+      // this.websocketConnectionService.connect();
     });
 
     

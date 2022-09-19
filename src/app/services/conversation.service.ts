@@ -6,7 +6,7 @@ import { Conversation } from '../models/conversation.model';
   providedIn: 'root'
 })
 export class ConversationService {
-  userConversations: Conversation[];
+  
   constructor(private httpClient: HttpClient) {
     
   }

@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Subject, switchAll, tap } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import SockJS from 'sockjs-client';
 import {over} from 'stompjs';
@@ -14,14 +14,20 @@ import { UserService } from './user.service';
 })
 export class WebsocketConnectionService {
   private socket$;
-  private messagesSubject$ = new Subject();
-  public messages$ = this.messagesSubject$.pipe(switchAll(), catchError( e => {throw e}));
   private stompClient;
   private user: User;
   private conversationIds: number[];
 
   constructor(private userService: UserService, private conversationService: ConversationService) {
-    this.user = this.userService.loggedInUser;
+    this.userService.loginUser().subscribe(user => {
+      this.userService.loggedInUser = user;
+      this.user = this.userService.loggedInUser;
+      this.conversationService.getConversationsByUserId(this.user.userId).subscribe(conversationIds => {
+        this.conversationIds = conversationIds;
+        this.conversationIds
+        console.log(this.conversationIds)
+      });
+    })
     
   }
 
@@ -29,27 +35,16 @@ export class WebsocketConnectionService {
     if (!this.socket$ || this.socket$.closed) {
       this.socket$ = this.getNewWebSocket();
       this.stompClient = over(this.socket$);
-      this.stompClient.connect({}, this.onConnected, this.onError)
+      this.stompClient.connect({}, this.onConnected.bind(this), this.onError.bind(this))
     }
   }
 
-  public onConnected() {
-    this.conversationService.getConversationsByUserId(this.user.userId).subscribe(conversationIds => {
-      this.conversationIds = conversationIds;
-      for(let conversationId of this.conversationIds) {
-        this.stompClient.subscribe(`/chatroom/${conversationId}`, this.onPublicMessageReceived);
-      }
-    })
-    //get user conversations
-    
-    
-    // let conversationIds: number[];
-    // conversations.map((conversation) => {
-    //   conversationIds.push(conversation.conversationId);
-    // })
-    
-    
-    // this.stompClient.subscribe('/user/'+ this.user.username+"/private", this.onPrivateMessagedReceived);
+  public onConnected(conversationIds) {
+    console.log("i am connected yay!")
+    for(let conversationId of this.conversationIds) {
+      this.stompClient.subscribe(`/chatroom/${conversationId}`, this.onPublicMessageReceived);
+    }
+    // this.stompClient.subscribe(`/chatroom/1`, this.onPublicMessageReceived);
   }
 
   private onPublicMessageReceived(payload) {
