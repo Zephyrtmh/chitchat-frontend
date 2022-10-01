@@ -57,19 +57,18 @@ export class ChatWindowComponent implements OnInit {
     let newMessage: Message = new Message(
       null, 
       this.userService.loggedInUser.userId, 
-      dateTime, messageContent, 
+      dateTime, 
+      messageContent, 
       this.activeConversation.conversationId
       );
     this.activeConversation.messages.push(newMessage);
-    console.log(dateTime);
-    console.log(dateNow.toLocaleTimeString());
     //update frontend with new message
 
     //reset form
     this.textForm.reset();
 
     this.messageService.sendMessage(newMessage).subscribe(message=> {
-      console.log(message);
+      console.log(newMessage)
 
       //scroll chat window down
       //get element of last message added
